@@ -63,9 +63,20 @@ include_directories(
 ${DBoW2_DIR}/install/include
 ${DLib_DIR}/../DLib/install/include)
 
+find_package(Caffe)
+include_directories(${Caffe_INCLUDE_DIRS})
+add_definitions(${Caffe_DEFINITIONS}) 
+
 add_executable(simple_loops
     src/simple_loops.cpp)
 target_link_libraries(simple_loops
     ${OpenCV_LIBS}
     ${DLib_LIBS}
 	${DBoW2_LIBS})
+
+add_executable(forward_propagate src/forward_propagate.cpp )
+target_link_libraries(simple_loops
+    ${OpenCV_LIBS}
+    ${DLib_LIBS}
+	${DBoW2_LIBS}
+	${Caffe_LIBRARIES})
